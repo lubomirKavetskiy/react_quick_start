@@ -1,8 +1,8 @@
 /**
  * Created by Любомир on 25.06.2017.
  */
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // УСТАНОВКА
 /* ReactDOM.render(
@@ -10,7 +10,6 @@ import ReactDOM from "react-dom";
    document.getElementById('root')
 );
  */
-
 
 // ВНЕДРЕНИЕ JSX
 /* function formatName(user) {
@@ -54,7 +53,6 @@ const a = "Lub";
 ReactDOM.render(<h1>Hello, 'a'</h1>, document.getElementById('root'));
 */
 
-
 // ОТРИСОВКА ЭЛЕМЕНТОВ
 
 /* const element = <h1>Hello!!!</h1>;
@@ -81,43 +79,49 @@ function tick(){
 setInterval(tick, 1000);
 */
 
-
 //========================================================//
 // Components and Props
 //========================================================//
-/* function Welcome(props){
-    return <h1>Hello, {props.name}</h1>
+/* function Welcome(props) {
+  return (
+    <h1>
+      Hello, {props.name}
+    </h1>
+  );
 }
 
-const element = <Welcome name='Lub'/>;
+const element = <Welcome name="Lub" />;
 
-ReactDOM.render(
-    element,
-    document.getElementById('root')
-);
+ReactDOM.render(element, document.getElementById('root'));
 
 //
 let node = document.getElementById('root');
 
 function Welcome(props) {
-    return <h1>Hello, {props.name}</h1>
+  return (
+    <h1>
+      Hello, {props.name}
+    </h1>
+  );
 }
 
+let naMe='Andriy';
+
 function App() {
-    return (
-        <div>
-            <Welcome name='Pet'/>
-            <Welcome name='Andr'/>
-        </div>
-    );
+  return (
+    <div>
+      <Welcome name={naMe} />
+      <Welcome name="Andr" />
+    </div>
+  );
 }
 
 // const el = App;
 
 ReactDOM.render(
-    <App />,
-    // el(),
-    node
+  <App />,
+  // el(),
+  node,
 );
 
 //
@@ -219,7 +223,6 @@ ReactDOM.render(
 );
 */
 
-
 //========================================================//
 // State and Lifecycle
 //========================================================//
@@ -303,11 +306,10 @@ ReactDOM.render(
 );
 */
 
-
 //========================================================//
 // Handling Events
 //========================================================//
-let node = document.getElementById('root');
+/* let node = document.getElementById('root');
 
 class Toggle extends React.Component {
     constructor(props){
@@ -338,33 +340,32 @@ ReactDOM.render(
     <Toggle />,
     node
 );
+*/
 
+//========================================================//
+// if
+//========================================================//
+/* let node = document.getElementById('root');
 
+function UserGreeting(props) {
+  return <h1>Welcome back</h1>;
+}
 
+function GuestGreeting(props) {
+    return <h1>Please sign up</h1>;
+}
 
+function Greeting(props) {
+    const isLoggedin = props.isLogge;
 
+    if (isLoggedin) {
+       return <UserGreeting />;
+    }
+    return <GuestGreeting />
+}
 
-
-
-
-
-
-
-
-
-
-// class Message extends React.Component {
-//     render() {
-//         return(
-//             <div>Hello developer {this.props.name}</div>
-//         );
-//     }
-// }
-//
-// var mountNode = document.getElementById("message");
-//
-// ReactDOM.render(
-//     <Message name="Lubomir2017" />,
-//     mountNode
-// );
-
+ReactDOM.render(
+ <Greeting isLogge={false}/>,
+    node
+);
+*/
