@@ -343,29 +343,258 @@ ReactDOM.render(
 */
 
 //========================================================//
-// if
+// if &&
 //========================================================//
 /* let node = document.getElementById('root');
 
+class LoginControl extends React.Component {
+    constructor(props) {
+        super(props);
+        this.loginClick = this.loginClick.bind(this);
+        this.logoutClick = this.logoutClick.bind(this);
+        this.state = {login: false};
+    }
+
+    loginClick() {
+        this.setState({login: true})
+    }
+
+    logoutClick() {
+        this.setState({login: false})
+    }
+
+    render() {
+        const login = this.state.login;
+
+        let button = null;
+
+        if (login) {
+            button = <LogoutButton onClick={this.logoutClick} />;
+        } else {
+            button = <LoginButton onClick={this.loginClick} />;
+        }
+
+        return (
+            <div>
+                <Greeting login={login} />
+                {button}
+            </div>
+        );
+    }
+}
+
 function UserGreeting(props) {
-  return <h1>Welcome back</h1>;
+    return <h1>Welcome back!</h1>;
 }
 
 function GuestGreeting(props) {
-    return <h1>Please sign up</h1>;
+    return <h1>Please sign up.</h1>;
 }
 
 function Greeting(props) {
-    const isLoggedin = props.isLogge;
-
-    if (isLoggedin) {
-       return <UserGreeting />;
+    const login = props.login;
+    if (login) {
+        return <UserGreeting />;
     }
-    return <GuestGreeting />
+    return <GuestGreeting />;
+}
+
+function LoginButton(props) {
+    return (
+        <button onClick={props.onClick}>
+            Login
+        </button>
+    );
+}
+
+function LogoutButton(props) {
+    return (
+        <button onClick={props.onClick}>
+            Logout
+        </button>
+    );
 }
 
 ReactDOM.render(
- <Greeting isLogge={false}/>,
+    <LoginControl />,
     node
 );
+
+//
+function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+
+    return (
+        <div>
+            <h1>Hello!</h1>
+            {unreadMessages.length > 0 &&
+                <h2>
+                    You have {unreadMessages.length} unread message.
+                </h2>
+            }
+        </div>
+    );
+}
+
+const message = ['React', 'Re: React'];
+
+ReactDOM.render(
+    <Mailbox unreadMessages={message} />,
+    node
+);
+
+//
+function WarningBanner(props) {
+    if (!props.warn) {
+        return null;
+    }
+
+    return (
+        <div className="warning">
+            Warning!
+        </div>
+    );
+}
+
+class Page extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {showWarning: true}
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick() {
+        this.setState(prevState => ({
+            showWarning: !prevState.showWarning
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <WarningBanner warn={this.state.showWarning} />
+                <button onClick={this.handleToggleClick}>
+                    {this.state.showWarning ? 'Hide' : 'Show'}
+                </button>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Page />,
+    document.getElementById('root')
+);
 */
+
+//========================================================//
+// ul>li
+//========================================================//
+let node = document.getElementById('root');
+
+// const numbers = [1, 2, 3, 4, 5];
+//
+// const listItems = numbers.map((number) =>
+//     <li>{number}</li>
+// );
+//
+// ReactDOM.render(
+//     <ul>{listItems}</ul>,
+//     node
+// );
+
+// adding keys
+function NumberList(props) {
+    const numbers = props.numBERS;
+
+    const listItems = numbers.map((num) =>
+        <li key={num.toString()} >
+            {num}
+        </li>
+    );
+
+    return (
+      <ul>{listItems}</ul>
+    );
+}
+
+const numBer = [1, 2, 3, 4, 5];
+
+ReactDOM.render(
+    <NumberList numBERS={numBer}/>,
+    node
+);
+
+//
+//EXAMPLE PROPS
+function ListItem(props) {
+    return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+    const numbers = props.numBERS;
+
+    const listItems = numbers.map((num) =>
+    <ListItem key={num.toString()}
+        value={num} />
+    );
+
+    return (
+        <ul>
+            {listItems}
+        </ul>
+    );
+}
+
+const numbeR = [1, 2, 3, 4];
+
+ReactDOM.render(
+    <NumberList numBERS={numbeR}/>,
+    document.getElementById('root')
+);
+
+//
+function Blog(props) {
+    const sideBar = (
+        <ul>
+            {props.posts.map((post) =>
+            <li key={post.id}>
+                {post.title}
+            </li>
+            )}
+        </ul>
+    );
+
+    const content = props.posts.map((post) =>
+        <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+        </div>
+    );
+
+    return (
+        <div>
+            {sideBar}
+            <hr />
+            {content}
+        </div>
+    );
+}
+
+const pOsTs =  [
+    {id: 1, title: 'Heloo', content: 'Welcom'},
+    {id: 2, title: 'Hi', content: 'By'}
+];
+
+ReactDOM.render(
+    <Blog posts={pOsTs}/>,
+    node
+);
+
+
+
+
+
+
+
+
