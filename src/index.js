@@ -490,7 +490,7 @@ ReactDOM.render(
 //========================================================//
 // ul>li
 //========================================================//
-let node = document.getElementById('root');
+/* let node = document.getElementById('root');
 
 // const numbers = [1, 2, 3, 4, 5];
 //
@@ -590,6 +590,336 @@ ReactDOM.render(
     <Blog posts={pOsTs}/>,
     node
 );
+*/
+
+
+//========================================================//
+// input
+//========================================================//
+/* // let node = document.getElementById('root');
+//
+// class Form extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             value: ' '
+//         };
+//         this.handleChange = this.handleChange.bind(this);
+//         this.handleSubmit = this.handleSubmit.bind(this);
+//     }
+//
+//     handleChange(event) {
+//         this.setState({value: event.target.value});
+//     }
+//
+//     handleSubmit(event) {
+//         alert('Text field value is: ' + this.state.value);
+//     }
+//
+//     render() {
+//         return(
+//             <div>
+//                 <input type="text"
+//                     placeholder="Hello"
+//                     // value={this.state.value}
+//                     onChange={this.handleChange}
+//                 />
+//
+//                 <button onClick={this.handleSubmit}>
+//                     Submit
+//                 </button>
+//             </div>
+//         );
+//     }
+// }
+//
+// ReactDOM.render(
+//     <Form />,
+//     node
+// );
+
+
+// class Form extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {value: ' '};
+//         this.handleChange = this.handleChange.bind(this);
+//         this.handleSubmit = this.handleSubmit.bind(this);
+//     }
+//
+//     handleChange(event) {
+//         this.setState({value: event.target.value});
+//     }
+//
+//     handleSubmit(event) {
+//         alert('Textarea value is: ' + this.state.value);
+//     }
+//
+//     render() {
+//         return (
+//             <div>
+//         <textarea
+//             name="description"
+//             value={this.state.value}
+//             onChange={this.handleChange}
+//         />
+//                 <br />
+//                 <button onClick={this.handleSubmit}>
+//                     Submit
+//                 </button>
+//             </div>
+//         );
+//     }
+// }
+//
+// ReactDOM.render(
+//     <Form />,
+//     document.getElementById('root')
+// );
+
+
+// class Form extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {value: ' '};
+//         this.handleChange = this.handleChange.bind(this);
+//         this.handleSubmit = this.handleSubmit.bind(this);
+//     }
+//
+//     handleChange(event) {
+//         this.setState({value: event.target.value});
+//     }
+//
+//     handleSubmit(event) {
+//         alert('Select value is: ' + this.state.value);
+//     }
+//
+//     render() {
+//         return (
+//             <div>
+//                 <select value={this.state.value} onChange={this.handleChange}>
+//                     <option value="A">Apple</option>
+//                     <option value="B">Banana</option>
+//                     <option value="C">Cranberry</option>
+//                 </select>
+//                 <button onClick={this.handleSubmit}>
+//                     Submit
+//                 </button>
+//             </div>
+//         );
+//     }
+// }
+//
+// ReactDOM.render(
+//     <Form />,
+//     document.getElementById('root')
+// );
+
+
+// class Form extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {value: 'B'};
+//         this.handleChange = this.handleChange.bind(this);
+//         this.handleSubmit = this.handleSubmit.bind(this);
+//     }
+//
+//     handleChange(event) {
+//         this.setState({value: event.target.value});
+//     }
+//
+//     handleSubmit(event) {
+//         alert('Radio button value is: ' + this.state.value);
+//     }
+//
+//     render() {
+//         return (
+//             <div>
+//                 <label>
+//                     <input
+//                         type="radio"
+//                         name="choice"
+//                         value="A"
+//                         onChange={this.handleChange} />
+//                     Option A
+//                 </label>
+//                 <br />
+//                 <label>
+//                     <input
+//                         type="radio"
+//                         name="choice"
+//                         value="B"
+//                         onChange={this.handleChange}
+//                         defaultChecked={true} />
+//                     Option B
+//                 </label>
+//                 <br />
+//                 <label>
+//                     <input
+//                         type="radio"
+//                         name="choice"
+//                         value="C"
+//                         onChange={this.handleChange} />
+//                     Option C
+//                 </label>
+//                 <br />
+//                 <br />
+//                 <button onClick={this.handleSubmit}>
+//                     Submit
+//                 </button>
+//             </div>
+//         );
+//     }
+// }
+//
+// ReactDOM.render(
+//     <Form value="A"/>,
+//     document.getElementById('root')
+// );
+
+
+class Form extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: {'A': false,
+                      'B': true,
+                      'C': false}
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        const value = event.target.value;
+        // Copy the object so we don't mutate the old state.
+        // (This requires an Object.assign polyfill):
+        const checked = Object.assign({}, this.state.checked);
+        console.log(this.state.checked);
+        console.log(checked);
+        if (!checked[value]) {
+            checked[value] = true;
+        } else {
+            checked[value] = false;
+        };
+        this.setState({checked});
+    }
+
+    handleSubmit(event) {
+        alert('Boxes checked: ' +
+            (this.state.checked.A ? 'A ' : '') +
+            (this.state.checked.B ? 'B ' : '') +
+            (this.state.checked.C ? 'C' : '')
+        );
+    }
+
+    render() {
+        return (
+            <div>
+                <label>
+                    <input
+                        type="checkbox"
+                        value="A"
+                        onChange={this.handleChange} />
+                    Option A
+                </label>
+                <br />
+                <label>
+                    <input
+                        type="checkbox"
+                        value="B"
+                        onChange={this.handleChange}
+                        defaultChecked={true} />
+                    Option B
+                </label>
+                <br />
+                <label>
+                    <input
+                        type="checkbox"
+                        value="C"
+                        onChange={this.handleChange} />
+                    Option C
+                </label>
+                <br />
+                <br />
+                <button onClick={this.handleSubmit}>
+                    Submit
+                </button>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Form />,
+    document.getElementById('root')
+);
+*/
+
+
+
+//========================================================//
+// upper knowlege
+//========================================================//
+let node = document.getElementById('root');
+
+function BoilingVerdict(props) {
+    if(props.celsiy >= 1) {
+        // console.log(props)
+        return <p>The water is boiling</p>
+    }
+    return <p>The water would not boil</p>
+}
+
+
+class Calculator extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ' '
+        }
+        this.handlChange = this.handlChange.bind(this);
+    }
+
+    handlChange(e) {
+        this.setState({
+            value: e.target.value    
+        });
+        console.log("this.state.value- " + this.state.value);
+    }
+    
+    render() {
+        console.log("val: " + this.state.value);
+        const val = this.state.value;
+
+        return(
+            <fieldset>
+                <legend>Enter temperature in Celsius:</legend>
+                <input
+                    type="text"
+                    value={val}
+                    onChange={this.handlChange}
+                />
+
+                <BoilingVerdict celsiy={parseFloat(val)}/>
+            </fieldset>
+
+        );
+    }
+}
+
+ReactDOM.render(
+    <Calculator />,
+    node
+);
+
+
+
+
+
+
+
+
 
 
 
