@@ -595,7 +595,6 @@ ReactDOM.render(
 );
 */
 
-
 //========================================================//
 // input
 //========================================================//
@@ -859,8 +858,6 @@ ReactDOM.render(
 );
 */
 
-
-
 //========================================================//
 // upper knowlege
 //========================================================//
@@ -919,21 +916,24 @@ ReactDOM.render(
 
 //
 
-const scaleNames = {
+/* const scaleNames = {
     c: 'Celsius',
     f: 'Fahrenheit'
 };
 
 function toCelsius(fahrenheit) {
-    return (fahrenheit - 32) * 5 / 9;
+    console.log('toCelsius: ' + fahrenheit);
+    return (fahrenheit - 32) * 5 / 9
 }
 
 function toFahrenheit(celsius) {
+    console.log('toFarenheit: ' + celsius);
     return (celsius * 9 / 5) + 32;
 }
 
 function tryConvert(value, convert) {
     const input = parseFloat(value);
+    console.log('value in tryConvert fot farenheit: ' + value);
     if (Number.isNaN(input)) {
         return '';
     }
@@ -943,7 +943,8 @@ function tryConvert(value, convert) {
 }
 
 function BoilingVerdict(props) {
-    if (props.celsius >= 100) {
+    console.log('props.celsiu__s: ' + props.celsiu__s);
+    if (props.celsiu__s >= 100) {
         return <p>The water would boil.</p>;
     }
     return <p>The water would not boil.</p>;
@@ -957,15 +958,19 @@ class TemperatureInput extends React.Component {
 
     handleChange(e) {
         this.props.onChang___e(e.target.value);
+        console.log('value: ' + this.props.valu__e);
+        console.log('scale: ' + this.props.scal__e);
     }
 
     render() {
-        const value = this.props.value;
-        const scale = this.props.scale;
+        const vAlue = this.props.valu__e;
+        const sCale = this.props.scal__e;
+        const typeofInput = this.props.typ__e;
         return (
             <fieldset>
-                <legend>Enter temperature in {scaleNames[scale]}:</legend>
-                <input value={value}
+                <legend>Enter temperature in {scaleNames[sCale]}:</legend>
+                <input type={typeofInput}
+                       value={vAlue}
                        onChange={this.handleChange} />
             </fieldset>
         );
@@ -980,32 +985,34 @@ class Calculator extends React.Component {
         this.state = {value: '', scale: 'c'};
     }
 
-    handleCelsiusChange(value) {
-        this.setState({scale: 'c', value: value});
+    handleCelsiusChange(val) {
+        this.setState({scale: 'c', value: val});
     }
 
-    handleFahrenheitChange(value) {
-        this.setState({scale: 'f', value});
+    handleFahrenheitChange(val) {
+        this.setState({scale: 'f', value: val});
     }
 
     render() {
-        const scale = this.state.scale;
-        const value = this.state.value;
-        const celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
-        const fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
+        const scalE = this.state.scale;
+        const valuE = this.state.value;
+        const celsiuS = scalE === 'f' ? tryConvert(valuE, toCelsius) : valuE;
+        const fahrenheit = scalE === 'c' ? tryConvert(valuE, toFahrenheit) : valuE;
 
         return (
             <div>
                 <TemperatureInput
-                    scale="c"
-                    value={celsius}
+                    typ__e="number"
+                    scal__e="c"
+                    valu__e={celsiuS}
                     onChang___e={this.handleCelsiusChange} />
                 <TemperatureInput
-                    scale="f"
-                    value={fahrenheit}
+                    typ__e="number"
+                    scal__e="f"
+                    valu__e={fahrenheit}
                     onChang___e={this.handleFahrenheitChange} />
                 <BoilingVerdict
-                    celsius={parseFloat(celsius)} />
+                    celsiu__s={parseFloat(celsiuS)} />
             </div>
         );
     }
@@ -1015,25 +1022,61 @@ ReactDOM.render(
     <Calculator />,
     document.getElementById('root')
 );
+*/
 
+/* function FancyBorder(props) {
+    return(
+        <div className={'FancyBorder Fancyborder-' + props.color}>
+            {props.children}
+        </div>
+    );
+}
 
+function WelcomDialoge() {
+    return (
+        <FancyBorder color="blue">
+            <h1 className="Dialog-title">
+                Welcom
+            </h1>
+            <p className="Dialog-message">
+                Thank you
+            </p>
+        </FancyBorder>
+    );
+}
 
+ReactDOM.render(
+    <WelcomDialoge />,
+    document.getElementById('root')
+);
+*/
 
+function Contacts() {
+  return <div className="Contacts" />;
+}
 
+function Chat() {
+  return <div className="Chat" />;
+}
 
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
+  );
+}
 
+function App() {
+  return <SplitPane left={<Contacts />} right={<Chat />} />;
+}
 
-
-
-
-
-
-
-
-
+ReactDOM.render(<App />, document.getElementById('root'));
 //==========================//
 // +++ REMEMBER +++ //
 //==========================//
-
-
-
